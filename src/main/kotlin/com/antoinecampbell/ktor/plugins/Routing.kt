@@ -8,12 +8,9 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
-import mu.KotlinLogging
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZonedDateTime
-
-private val logger = KotlinLogging.logger {}
 
 fun Application.configureRouting() {
     routing {
@@ -33,7 +30,7 @@ fun Application.configureRouting() {
         }
         post("/items") {
             val item = call.receive<Item>()
-            logger.debug("Item: $item")
+            call.application.environment.log.debug("Item: {}", item)
             call.respond(item)
         }
     }

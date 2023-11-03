@@ -1,6 +1,8 @@
 ktor:
+  development: "$DEVELOPMENT:true"
   deployment:
     port: "$PORT:8080"
+    shutdownGracePeriod: 60000
   application:
     modules:
       - com.antoinecampbell.ktor.ApplicationKt.module
