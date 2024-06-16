@@ -14,10 +14,9 @@ fun Application.configureSerialization() {
         jackson {
             disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            registerModule(JavaTimeModule()
-                .apply {
-                    setTimeZone(TimeZone.getTimeZone("America/New_York"))
-                })
+            registerModule(
+                JavaTimeModule().apply { setTimeZone(TimeZone.getTimeZone("America/New_York")) }
+            )
         }
     }
 }

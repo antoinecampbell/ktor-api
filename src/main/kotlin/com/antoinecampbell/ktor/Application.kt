@@ -14,6 +14,7 @@ import io.ktor.server.plugins.compression.deflate
 import io.ktor.server.plugins.compression.gzip
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
+import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -21,7 +22,9 @@ fun Application.module() {
     configureSerialization()
     configureRouting()
     configureMetrics()
-    install(CallLogging)
+    install(CallLogging) {
+        level = Level.DEBUG
+    }
     install(Compression) {
         gzip()
         deflate()
