@@ -11,6 +11,7 @@ import org.jetbrains.exposed.sql.javatime.date
 import org.jetbrains.exposed.sql.javatime.timestamp
 import java.time.Instant
 import java.time.LocalDate
+import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
 object ItemTable : IntIdTable("item") {
@@ -18,24 +19,27 @@ object ItemTable : IntIdTable("item") {
     val timestamp = timestamp("timestamp").defaultExpression(CurrentTimestamp)
     val date = date("date").defaultExpression(CurrentDate)
     val zonedTimestamp = timestamp("zoned_timestamp").defaultExpression(CurrentTimestamp)
+    val offsetTimestamp = timestamp("offset_timestamp").defaultExpression(CurrentTimestamp)
 }
 
 class ItemDao(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<ItemDao>(ItemTable)
 
     var name: String by ItemTable.name
-    private var timestamp: Instant by ItemTable.timestamp
-    private var date: LocalDate by ItemTable.date
-    private var zonedTimestamp: Instant by ItemTable.zonedTimestamp
-
-    fun toItem() = Item(
-        id = id.value,
-        name = name,
-        timestamp = timestamp,
-        date = date,
-        zonedTimestamp = zonedTimestamp.atZone(ZoneOffset.systemDefault())
-    )
+    var timestamp: Instant by ItemTable.timestamp
+    var date: LocalDate by ItemTable.date
+    var zonedTimestamp: Instant by ItemTable.zonedTimestamp
+    var offsetTimestamp: Instant by ItemTable.offsetTimestamp
 }
+
+fun ItemDao.toItem() = Item(
+    id = id.value,
+    name = name,
+    timestamp = timestamp,
+    date = date,
+    zonedTimestamp = zonedTimestamp.atZone(ZoneOffset.systemDefault()),
+    offsetTimestamp = offsetTimestamp.atOffset(OffsetDateTime.now().offset)
+)
 
 interface ItemRepository {
     suspend fun save(item: Item): Item

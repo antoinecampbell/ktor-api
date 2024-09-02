@@ -8,8 +8,7 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 
-fun Application.configureItemModule() {
-    val repository: ItemRepository = DefaultItemRepository()
+fun Application.configureItemModule(repository: ItemRepository) {
     routing {
         get("/items") {
             call.respond(repository.findAll())

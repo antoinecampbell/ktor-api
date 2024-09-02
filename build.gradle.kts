@@ -47,9 +47,9 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
     // Logging
-    // implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
-    implementation("ch.qos.logback:logback-classic:1.5.6")
-    implementation("net.logstash.logback:logstash-logback-encoder:7.3")
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
+    implementation("ch.qos.logback:logback-classic:1.5.7")
+    implementation("net.logstash.logback:logstash-logback-encoder:8.0")
     // Monitoring
     implementation("io.ktor:ktor-server-metrics-micrometer")
     implementation("io.micrometer:micrometer-registry-prometheus:1.11.5")
@@ -59,9 +59,9 @@ dependencies {
     implementation("io.arrow-kt:suspendapp:0.4.0")
 
     // Koin
-    implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
-    implementation("io.insert-koin:koin-ktor")
-    implementation("io.insert-koin:koin-logger-slf4j")
+//    implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
+//    implementation("io.insert-koin:koin-ktor")
+//    implementation("io.insert-koin:koin-logger-slf4j")
 
     // Database
     implementation("com.zaxxer:HikariCP:5.1.0")
