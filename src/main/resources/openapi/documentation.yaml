@@ -1,0 +1,289 @@
+openapi: "3.1.0"
+info:
+  title: "ktor-api"
+  description: "ktor-api"
+  version: "0.0.1"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /:
+    get:
+      description: "External ping endpoint"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              example: "Hello World"
+  /metrics:
+    get:
+      description: "OpenTelemtry metrics"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "text/plain":
+              schema:
+                type: "string"
+  /items:
+    get:
+      tags:
+        - items
+      description: "Fetch all items"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Item"
+    post:
+      tags:
+        - items
+      description: "Create a new item"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /items/{id}:
+    get:
+      tags:
+        - items
+      description: "Fetch item by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /items2:
+    get:
+      tags:
+        - items2
+      description: "Fetch all items"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Item"
+    post:
+      tags:
+        - items2
+      description: "Create a new item"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /items2/{id}:
+    get:
+      tags:
+        - items2
+      description: "Fetch item by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /notes:
+    get:
+      tags:
+        - notes
+      description: "Fetch all notes"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Note"
+    post:
+      tags:
+        - notes
+      description: "Create a new note"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Note"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Note"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /notes/{id}:
+    get:
+      tags:
+        - notes
+      description: "Fetch note by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Note"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+components:
+  responses:
+    BadRequest:
+      description: "The request was not formatted properly"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    NotFound:
+      description: "The specified resource was not found"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    ServerError:
+      description: "An unexpected error occurred"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    ErrorResponse:
+      description: "Standard error object"
+      type: "object"
+      properties:
+        message:
+          type: "string"
+        code:
+          type: "string"
+    Item:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        name:
+          type: "string"
+        timestamp:
+          type: "string"
+          format: "date-time"
+        date:
+          type: "string"
+          format: "date"
+        zonedTimestamp:
+          type: "string"
+          format: "date-time"
+        offsetTimestamp:
+          type: "string"
+          format: "date-time"
+      required:
+        - "name"
+    Note:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+        name:
+          type: "string"
+        timestamp:
+          type: "string"
+          format: "date-time"
+        date:
+          type: "string"
+          format: "date"
+        zonedTimestamp:
+          type: "string"
+          format: "date-time"
+          examples:
+            - "2024-09-02T14:53:44.789996-04:00"
+        offsetTimestamp:
+          type: "string"
+          format: "date-time"
+          examples:
+            - "2024-09-02T14:53:44.789996-04:00"
+      required:
+        - "name"

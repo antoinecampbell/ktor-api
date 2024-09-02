@@ -9,10 +9,11 @@ import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Transaction
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import javax.sql.DataSource
 
-lateinit var dataSource: HikariDataSource
+private lateinit var dataSource: HikariDataSource
 
-fun Application.configureDatabase() {
+fun Application.configureDatabase(): DataSource {
     val params = datasourceParams(environment.config)
     val config = HikariConfig().apply {
         driverClassName = params.driver
@@ -32,6 +33,8 @@ fun Application.configureDatabase() {
 
     // Configure Exposed
     Database.connect(dataSource)
+
+    return dataSource
 }
 
 suspend fun <T> suspendTransaction(block: Transaction.() -> T): T =

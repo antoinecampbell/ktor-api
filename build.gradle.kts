@@ -43,6 +43,9 @@ dependencies {
     implementation("io.ktor:ktor-server-compression")
     implementation("io.ktor:ktor-server-status-pages")
     implementation("io.ktor:ktor-server-config-yaml")
+    implementation("io.ktor:ktor-server-swagger")
+    // OpenAPI / Swagger
+    // implementation("io.bkbn:kompendium-core:3.14.4")
     // Serialization
     implementation("io.ktor:ktor-serialization-jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
@@ -59,9 +62,9 @@ dependencies {
     implementation("io.arrow-kt:suspendapp:0.4.0")
 
     // Koin
-//    implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
-//    implementation("io.insert-koin:koin-ktor")
-//    implementation("io.insert-koin:koin-logger-slf4j")
+    // implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
+    // implementation("io.insert-koin:koin-ktor")
+    // implementation("io.insert-koin:koin-logger-slf4j")
 
     // Database
     implementation("com.zaxxer:HikariCP:5.1.0")
@@ -70,7 +73,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.4")
     implementation("com.h2database:h2:2.3.232")
 
-    // ORM
+    // Exposed ORM
     implementation(platform("org.jetbrains.exposed:exposed-bom:0.54.0"))
     implementation("org.jetbrains.exposed:exposed-jdbc")
     implementation("org.jetbrains.exposed:exposed-dao")
