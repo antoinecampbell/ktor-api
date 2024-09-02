@@ -1,8 +1,17 @@
 ktor:
+  application:
+    modules:
+      - com.antoinecampbell.ktor.ApplicationKt.module
   development: "$DEVELOPMENT:true"
   deployment:
     port: "$PORT:8080"
     shutdownGracePeriod: 60000
-  application:
-    modules:
-      - com.antoinecampbell.ktor.ApplicationKt.module
+
+datasource:
+  driver: "$DATABASE_DRIVER:org.postgresql.Driver"
+  jdbcUrl: "$DATABASE_JDBC_URL:jdbc:postgresql://localhost:5432/postgres"
+  username: "$DATABASE_USERNAME:postgres"
+  password: "$DATABASE_PASSWORD:postgres"
+flyway:
+  locations:
+    - db/migration

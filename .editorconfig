@@ -5,6 +5,7 @@ charset = utf-8
 indent_style = space
 max_line_length = 120
 
+# noinspection EditorConfigKeyCorrectness
 [{*.kt,*.kts}]
 # Don't allow any wildcard imports
 ij_kotlin_packages_to_use_import_on_demand = unset
@@ -19,3 +20,4 @@ ktlint_standard_string-template-indent = disabled
 ktlint_standard_multiline-expression-wrapping = disabled
 ktlint_standard_trailing-comma-on-declaration-site = disabled
 ktlint_standard_trailing-comma-on-call-site = disabled
+ktlint_standard_blank-line-before-declaration = disabled

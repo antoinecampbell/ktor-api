@@ -4,6 +4,7 @@ val ktorVersion: String by project
 val kotlinVersion: String by project
 val jacksonVersion: String by project
 val arrowKtVersion: String by project
+val koinVersion: String by project
 
 plugins {
     kotlin("jvm")
@@ -36,10 +37,6 @@ dependencies {
     implementation(platform("io.ktor:ktor-bom:$ktorVersion"))
     // Server
     implementation("io.ktor:ktor-server-netty-jvm")
-    //
-    // implementation("io.ktor:ktor-server-core-jvm")
-    // implementation("io.ktor:ktor-server-host-common-jvm")
-    // implementation("io.ktor:ktor-server-status-pages-jvm")
     // Server plugins
     implementation("io.ktor:ktor-server-call-logging")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
@@ -59,6 +56,27 @@ dependencies {
     // Arrow
     implementation("io.arrow-kt:arrow-core:$arrowKtVersion")
     implementation("io.arrow-kt:arrow-fx-coroutines:$arrowKtVersion")
+    implementation("io.arrow-kt:suspendapp:0.4.0")
+
+    // Koin
+    implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
+    implementation("io.insert-koin:koin-ktor")
+    implementation("io.insert-koin:koin-logger-slf4j")
+
+    // Database
+    implementation("com.zaxxer:HikariCP:5.1.0")
+    implementation("org.flywaydb:flyway-core:10.17.2")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
+    implementation("org.postgresql:postgresql:42.7.4")
+    implementation("com.h2database:h2:2.3.232")
+
+    // ORM
+    implementation(platform("org.jetbrains.exposed:exposed-bom:0.54.0"))
+    implementation("org.jetbrains.exposed:exposed-jdbc")
+    implementation("org.jetbrains.exposed:exposed-dao")
+    implementation("org.jetbrains.exposed:exposed-java-time")
+    implementation("org.jetbrains.exposed:exposed-json")
+    runtimeOnly("org.jetbrains.exposed:exposed-dao")
 
     // Testing
     testImplementation("io.ktor:ktor-server-tests-jvm")
