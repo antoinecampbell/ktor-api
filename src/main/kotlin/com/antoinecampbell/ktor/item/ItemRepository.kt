@@ -17,6 +17,7 @@ import org.jetbrains.exposed.sql.javatime.CurrentDate
 import org.jetbrains.exposed.sql.javatime.CurrentTimestamp
 import org.jetbrains.exposed.sql.javatime.date
 import org.jetbrains.exposed.sql.javatime.timestamp
+import org.jetbrains.exposed.sql.selectAll
 import java.time.Instant
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -93,10 +94,10 @@ class TableItemRepository : ItemRepository {
     }
 
     override suspend fun findById(id: Int) = suspendTransaction {
-        ItemDao.findById(id)?.toItem()
+        ItemTable.selectAll().where { ItemTable.id eq id }.singleOrNull()?.toItem()
     }
 
     override suspend fun findAll() = suspendTransaction {
-        ItemDao.all().map(ItemDao::toItem)
+        ItemTable.selectAll().toList().map { it.toItem() }
     }
 }

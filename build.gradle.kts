@@ -11,6 +11,7 @@ plugins {
     id("io.ktor.plugin")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("org.jlleitschuh.gradle.ktlint")
+    id("org.jetbrains.kotlinx.kover")
 }
 
 kotlin {
@@ -82,6 +83,14 @@ dependencies {
     runtimeOnly("org.jetbrains.exposed:exposed-dao")
 
     // Testing
+    testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-tests-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.8.10")
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
+    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("org.testcontainers:postgresql:1.20.1")
+}
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy("koverHtmlReport", "koverXmlReport")
 }

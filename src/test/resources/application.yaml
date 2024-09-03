@@ -1,0 +1,14 @@
+ktor:
+  application:
+    modules:
+      - com.antoinecampbell.ktor.ApplicationKt.module
+  development: "false"
+
+datasource:
+  driver: "org.testcontainers.jdbc.ContainerDatabaseDriver"
+  jdbcUrl: "jdbc:tc:postgresql:16-alpine:///db"
+  username: "postgres"
+  password: "postgres"
+flyway:
+  locations:
+    - db/migration
