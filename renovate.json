@@ -1,3 +1,22 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "enabledManagers": ["gradle", "gradle-wrapper", "github-actions"],
+  "prCreation": "immediate",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "automergeSchedule": ["after 10am every weekday"],
+      "internalChecksFilter": "flexible",
+      "minimumReleaseAge": "14 days",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "labels": ["auto merge"]
+    }
+  ]
 }
