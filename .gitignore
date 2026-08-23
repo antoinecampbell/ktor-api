@@ -13,3 +13,4 @@ out/
 
 ### VS Code ###
 .vscode/
+/.kotlin

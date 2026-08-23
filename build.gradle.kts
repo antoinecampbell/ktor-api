@@ -1,27 +1,20 @@
-val development: String by project
-val environment: String by project
-val ktorVersion: String by project
-val kotlinVersion: String by project
-val jacksonVersion: String by project
-val arrowKtVersion: String by project
-val koinVersion: String by project
-
 plugins {
-    kotlin("jvm")
-    id("io.ktor.plugin")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("org.jlleitschuh.gradle.ktlint")
-    id("org.jetbrains.kotlinx.kover")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktor)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
 }
 
 group = "com.antoinecampbell.ktor"
 application {
     mainClass.set("com.antoinecampbell.ktor.ApplicationKt")
 
+    val development = providers.gradleProperty("development").orElse("true").get()
     val args = mutableListOf("-Dio.ktor.development=$development")
     if (development.toBoolean()) {
         args += "-Dlogback.configurationFile=logback-local.xml"
@@ -35,59 +28,58 @@ repositories {
 
 dependencies {
     // Ktor BOM
-    implementation(platform("io.ktor:ktor-bom:$ktorVersion"))
+    implementation(platform(libs.ktor.bom))
     // Server
-    implementation("io.ktor:ktor-server-netty-jvm")
+    implementation(libs.ktor.server.netty)
     // Server plugins
-    implementation("io.ktor:ktor-server-call-logging")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm")
-    implementation("io.ktor:ktor-server-compression")
-    implementation("io.ktor:ktor-server-status-pages")
-    implementation("io.ktor:ktor-server-config-yaml")
-    implementation("io.ktor:ktor-server-swagger")
+    implementation(libs.ktor.server.call.logging)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.compression)
+    implementation(libs.ktor.server.status.pages)
+    implementation(libs.ktor.server.config.yaml)
+    implementation(libs.ktor.server.swagger)
     // OpenAPI / Swagger
     // implementation("io.bkbn:kompendium-core:3.14.4")
     // Serialization
-    implementation("io.ktor:ktor-serialization-jackson")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    implementation(libs.ktor.serialization.jackson)
+    implementation(libs.jackson.datatype.jsr310)
     // Logging
-    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
-    implementation("ch.qos.logback:logback-classic:1.5.7")
-    implementation("net.logstash.logback:logstash-logback-encoder:8.0")
+    implementation(libs.kotlin.logging)
+    implementation(libs.logback.classic)
+    implementation(libs.logstash.logback.encoder)
     // Monitoring
-    implementation("io.ktor:ktor-server-metrics-micrometer")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.11.5")
+    implementation(libs.ktor.server.metrics.micrometer)
+    implementation(libs.micrometer.registry.prometheus)
     // Arrow
-    implementation("io.arrow-kt:arrow-core:$arrowKtVersion")
-    implementation("io.arrow-kt:arrow-fx-coroutines:$arrowKtVersion")
-    implementation("io.arrow-kt:suspendapp:0.4.0")
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+    implementation(libs.suspendapp)
 
     // Koin
-    // implementation(platform("io.insert-koin:koin-bom:$koinVersion"))
-    // implementation("io.insert-koin:koin-ktor")
-    // implementation("io.insert-koin:koin-logger-slf4j")
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.logger.slf4j)
 
     // Database
-    implementation("com.zaxxer:HikariCP:5.1.0")
-    implementation("org.flywaydb:flyway-core:10.17.2")
-    runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
-    implementation("org.postgresql:postgresql:42.7.4")
-    implementation("com.h2database:h2:2.3.232")
+    implementation(libs.hikari)
+    implementation(libs.flyway.core)
+    runtimeOnly(libs.flyway.database.postgresql)
+    implementation(libs.postgresql)
+    implementation(libs.h2)
 
     // Exposed ORM
-    implementation(platform("org.jetbrains.exposed:exposed-bom:0.54.0"))
-    implementation("org.jetbrains.exposed:exposed-jdbc")
-    implementation("org.jetbrains.exposed:exposed-dao")
-    implementation("org.jetbrains.exposed:exposed-java-time")
-    implementation("org.jetbrains.exposed:exposed-json")
-    runtimeOnly("org.jetbrains.exposed:exposed-dao")
+    implementation(platform(libs.exposed.bom))
+    implementation(libs.exposed.jdbc)
+    implementation(libs.exposed.dao)
+    implementation(libs.exposed.java.time)
+    implementation(libs.exposed.json)
+    runtimeOnly(libs.exposed.dao)
 
     // Testing
-    testImplementation(kotlin("test"))
-    testImplementation("io.ktor:ktor-server-tests-jvm")
-    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
-    testImplementation("io.mockk:mockk:1.13.12")
-    testImplementation("org.testcontainers:postgresql:1.20.1")
+    testImplementation(libs.ktor.server.test.host)
+    testImplementation(libs.kotest.runner.junit5)
+    testImplementation(libs.mockk)
+    testImplementation(libs.testcontainers.postgresql)
 }
 
 tasks.test {

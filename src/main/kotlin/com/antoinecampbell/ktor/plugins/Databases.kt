@@ -27,7 +27,9 @@ fun Application.configureDatabase(): DataSource {
     dataSource = HikariDataSource(config)
 
     // Start Flyway migrations
-    Flyway.configure().dataSource(dataSource)
+    Flyway
+        .configure()
+        .dataSource(dataSource)
         .load()
         .migrate()
 

@@ -18,11 +18,10 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.config.ConfigLoader
-import io.ktor.server.config.ConfigLoader.Companion.load
 import io.ktor.server.netty.EngineMain
 import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.plugins.NotFoundException
-import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.compression.Compression
 import io.ktor.server.plugins.compression.deflate
 import io.ktor.server.plugins.compression.gzip
@@ -48,7 +47,7 @@ fun Application.module() {
     configureRouting()
     configureMetrics()
     configureSwagger()
-    if (environment.developmentMode) {
+    if (developmentMode) {
         install(CallLogging) {
             level = Level.DEBUG
         }
@@ -78,7 +77,9 @@ fun Application.module() {
     configureNoteModule(dependencies.notesRepository)
 }
 
-class Dependencies(dataSource: DataSource) {
+class Dependencies(
+    dataSource: DataSource
+) {
     val daoItemRepository = DaoItemRepository()
     val tableItemRepository = TableItemRepository()
     val notesRepository = DefaultNoteRepository(dataSource)

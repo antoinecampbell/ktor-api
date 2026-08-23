@@ -38,7 +38,9 @@ object ItemTable : IntIdTable("item") {
     val offsetTimestamp = timestamp("offset_timestamp").defaultExpression(CurrentTimestamp)
 }
 
-class ItemDao(id: EntityID<Int>) : IntEntity(id) {
+class ItemDao(
+    id: EntityID<Int>
+) : IntEntity(id) {
     companion object : IntEntityClass<ItemDao>(ItemTable)
 
     var name: String by ItemTable.name
@@ -88,13 +90,19 @@ class DaoItemRepository : ItemRepository {
  */
 class TableItemRepository : ItemRepository {
     override suspend fun save(item: Item) = suspendTransaction {
-        ItemTable.insertReturning {
-            it[name] = item.name
-        }.single().toItem()
+        ItemTable
+            .insertReturning {
+                it[name] = item.name
+            }.single()
+            .toItem()
     }
 
     override suspend fun findById(id: Int) = suspendTransaction {
-        ItemTable.selectAll().where { ItemTable.id eq id }.singleOrNull()?.toItem()
+        ItemTable
+            .selectAll()
+            .where { ItemTable.id eq id }
+            .singleOrNull()
+            ?.toItem()
     }
 
     override suspend fun findAll() = suspendTransaction {
