@@ -72,7 +72,7 @@ dependencies {
     implementation("org.flywaydb:flyway-core:10.17.2")
     runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
     implementation("org.postgresql:postgresql:42.7.4")
-    implementation("com.h2database:h2:2.3.232")
+    implementation("com.h2database:h2:2.4.240")
 
     // Exposed ORM
     implementation(platform("org.jetbrains.exposed:exposed-bom:0.54.0"))
