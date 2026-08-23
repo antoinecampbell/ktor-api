@@ -3,9 +3,9 @@ kotlin = "2.4.10"
 ktor = "3.5.2"
 ktlint = "14.2.0"
 jackson = "2.22.1"
-arrow = "1.2.0"
+arrow = "1.2.4"
 koin = "3.5.6"
-logback = "1.5.7"
+logback = "1.6.1"
 micrometer = "1.11.5"
 hikari = "5.1.0"
 flyway = "10.17.2"
@@ -35,14 +35,14 @@ ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml" }
 ktor-server-swagger = { module = "io.ktor:ktor-server-swagger" }
 ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
-kotlin-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.0" }
+kotlin-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.14" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version = "8.0" }
 ktor-server-metrics-micrometer = { module = "io.ktor:ktor-server-metrics-micrometer" }
 micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "micrometer" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
-suspendapp = { module = "io.arrow-kt:suspendapp", version = "0.4.0" }
+suspendapp = { module = "io.arrow-kt:suspendapp", version = "0.5.0" }
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor" }
 koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j" }
