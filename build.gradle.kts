@@ -71,7 +71,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.flywaydb:flyway-core:10.17.2")
     runtimeOnly("org.flywaydb:flyway-database-postgresql:10.17.2")
-    implementation("org.postgresql:postgresql:42.7.4")
+    implementation("org.postgresql:postgresql:42.7.13")
     implementation("com.h2database:h2:2.3.232")
 
     // Exposed ORM
