@@ -86,7 +86,7 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
-    testImplementation("io.mockk:mockk:1.13.12")
+    testImplementation("io.mockk:mockk:1.14.11")
     testImplementation("org.testcontainers:postgresql:1.20.1")
 }
 
