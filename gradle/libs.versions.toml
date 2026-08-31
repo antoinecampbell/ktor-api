@@ -14,7 +14,7 @@ h2 = "2.4.240"
 exposed = "0.61.0"
 kotest = "5.9.1"
 mockk = "1.13.12"
-testcontainers = "1.20.1"
+testcontainers = "1.21.4"
 kover = "0.9.9"
 
 [plugins]
