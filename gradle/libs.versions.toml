@@ -3,7 +3,7 @@ kotlin = "2.4.10"
 ktor = "3.5.2"
 ktlint = "14.2.0"
 jackson = "2.22.1"
-arrow = "1.2.4"
+arrow = "2.2.3"
 koin = "3.5.6"
 logback = "1.6.1"
 micrometer = "1.17.0"
@@ -42,7 +42,7 @@ ktor-server-metrics-micrometer = { module = "io.ktor:ktor-server-metrics-microme
 micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "micrometer" }
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
-suspendapp = { module = "io.arrow-kt:suspendapp", version = "0.5.0" }
+suspendapp = { module = "io.arrow-kt:suspendapp", version = "2.2.3" }
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor" }
 koin-logger-slf4j = { module = "io.insert-koin:koin-logger-slf4j" }
