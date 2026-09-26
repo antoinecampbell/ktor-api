@@ -4,11 +4,8 @@ import com.antoinecampbell.ktor.datasourceParams
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.Application
-import kotlinx.coroutines.Dispatchers
 import org.flywaydb.core.Flyway
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.Transaction
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.jetbrains.exposed.v1.jdbc.Database
 import javax.sql.DataSource
 
 private lateinit var dataSource: HikariDataSource
@@ -38,8 +35,3 @@ fun Application.configureDatabase(): DataSource {
 
     return dataSource
 }
-
-suspend fun <T> suspendTransaction(block: Transaction.() -> T): T =
-    newSuspendedTransaction(Dispatchers.IO, statement = {
-        block()
-    })

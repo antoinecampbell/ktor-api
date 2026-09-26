@@ -2,7 +2,6 @@ package com.antoinecampbell.ktor.item
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.server.application.Application
-import io.ktor.server.application.call
 import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.plugins.NotFoundException
 import io.ktor.server.request.receive
