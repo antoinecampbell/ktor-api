@@ -13,6 +13,7 @@
       "automergeType": "pr",
       "automergeStrategy": "squash",
       "automergeSchedule": ["after 10am every weekday"],
+      "internalChecksFilter": "flexible",
       "minimumReleaseAge": "14 days",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "labels": ["auto merge"]
