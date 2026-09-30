@@ -13,3 +13,7 @@ data class Note(
     val zonedTimestamp: ZonedDateTime?,
     val offsetTimestamp: OffsetDateTime?,
 )
+
+data class NoteListResponse(
+    val notes: List<Note>
+)

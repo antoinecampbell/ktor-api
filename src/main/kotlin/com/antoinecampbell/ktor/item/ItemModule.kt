@@ -19,7 +19,7 @@ fun Application.configureItemModule(
     routing {
         // Dao endpoints
         get("/items") {
-            call.respond(daoRepository.findAll())
+            call.respond(ItemListResponse(items = daoRepository.findAll()))
         }
         get("/items/{id}") {
             val param = call.parameters["id"]
@@ -35,7 +35,7 @@ fun Application.configureItemModule(
         }
         // Table endpoints
         get("/items2") {
-            call.respond(tableRepository.findAll())
+            call.respond(ItemListResponse(items = tableRepository.findAll()))
         }
         get("/items2/{id}") {
             val param = call.parameters["id"]

@@ -13,3 +13,7 @@ data class Item(
     val zonedTimestamp: ZonedDateTime?,
     val offsetTimestamp: OffsetDateTime?,
 )
+
+data class ItemListResponse(
+    val items: List<Item>
+)
