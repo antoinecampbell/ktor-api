@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.4.21"
-ktor = "3.6.0"
+ktor = "3.6.1"
 ktlint = "14.2.0"
 jackson = "2.22.3"
 arrow = "2.2.3"
